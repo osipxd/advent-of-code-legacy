@@ -33,7 +33,24 @@
  */
 object Day2 {
 
+    // Complexity: O(n)
     fun part1Naive(input: List<String>): Int {
-        return 0
+        return input.asSequence()
+            .map(::parsePolicyAndPassword)
+            .count { (policy, password) ->
+                password.count { it == policy.char } in policy.range
+            }
     }
+
+    private fun parsePolicyAndPassword(line: String): Pair<Policy, String> {
+        val (policy, password) = line.split(": ")
+        val (range, char) = policy.split(" ")
+        val (from, to) = range.split("-").map(String::toInt)
+        return Policy(from..to, char.first()) to password
+    }
+
+    private data class Policy(
+        val range: ClosedRange<Int>,
+        val char: Char,
+    )
 }
