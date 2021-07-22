@@ -49,6 +49,15 @@ object Day1 {
         error("What? There no answer?")
     }
 
+    // Complexity: O(n)
+    fun part1Optimized(expenseReport: List<Int>): Int {
+        val pairs = expenseReport.associateBy { 2020 - it }
+        val a = expenseReport.first { it in pairs }
+        val b = pairs.getValue(a)
+
+        return (a * b).also { println("$a * $b = $it") }
+    }
+
     // Complexity: O(n^3)
     fun part2Naive(expenseReport: List<Int>): Int {
         for (a in expenseReport) {
