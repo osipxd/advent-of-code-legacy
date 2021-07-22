@@ -25,7 +25,16 @@
  */
 object Day1 {
 
-    fun task1(expenseReport: List<Int>): Int {
-        return 0
+    // Complexity: O(n^2)
+    fun part1Naive(expenseReport: List<Int>): Int {
+        for (a in expenseReport) {
+            for (b in expenseReport) {
+                if (a + b == 2020) {
+                    return (a * b).also { println("$a * $b = $it") }
+                }
+            }
+        }
+
+        error("What? There no answer?")
     }
 }
