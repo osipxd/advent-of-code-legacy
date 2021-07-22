@@ -55,34 +55,33 @@
 object Day2 {
 
     // Complexity: O(n)
-    fun part1Naive(input: List<String>): Int {
-        return input.asSequence()
-            .map(::parsePolicyAndPassword)
-            .count { (policy, password) ->
-                password.count { it == policy.char } in policy.range
-            }
+    fun part1(input: Sequence<Pair<Policy, String>>): Int {
+        return input.count { (policy, password) ->
+            password.count { it == policy.char } in policy.range
+        }
     }
 
     // Complexity: O(n)
-    fun part2Naive(input: List<String>): Int {
-        return input.asSequence()
-            .map(::parsePolicyAndPassword)
-            .count { (policy, password) ->
-                val firstMatch = password.getOrNull(policy.range.start - 1) == policy.char
-                val secondMatch = password.getOrNull(policy.range.endInclusive - 1) == policy.char
-                firstMatch xor secondMatch
-            }
+    fun part2(input: Sequence<Pair<Policy, String>>): Int {
+        return input.count { (policy, password) ->
+            val firstMatch = password[policy.num1 - 1] == policy.char
+            val secondMatch = password[policy.num2 - 1] == policy.char
+            firstMatch xor secondMatch
+        }
     }
 
-    private fun parsePolicyAndPassword(line: String): Pair<Policy, String> {
-        val (policy, password) = line.split(": ")
-        val (range, char) = policy.split(" ")
-        val (from, to) = range.split("-").map(String::toInt)
-        return Policy(from..to, char.first()) to password
+    fun parsePolicyAndPassword(line: String): Pair<Policy, String> {
+        val (num1, num2, char, password) = line.split("-", " ", ": ")
+        return Policy(num1.toInt(), num2.toInt(), char.single()) to password
     }
 
-    private data class Policy(
-        val range: ClosedRange<Int>,
+    data class Policy(
+        val num1: Int,
+        val num2: Int,
         val char: Char,
-    )
+    ) {
+
+        val range: IntRange
+            get() = num1..num2
+    }
 }
