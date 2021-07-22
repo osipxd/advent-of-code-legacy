@@ -1,6 +1,12 @@
 import Resources.getResourceAsStream
 import java.io.InputStream
 
+fun readLineSequence(name: String): Sequence<String> {
+    return getResourceAsStream(name)
+        .bufferedReader()
+        .lineSequence()
+}
+
 fun readLines(name: String): List<String> {
     return getResourceAsStream(name)
         .bufferedReader()
