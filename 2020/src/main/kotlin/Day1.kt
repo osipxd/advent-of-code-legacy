@@ -51,10 +51,7 @@ object Day1 {
 
     // Complexity: O(n)
     fun part1Optimized(expenseReport: List<Int>): Int {
-        val pairs = expenseReport.associateBy { 2020 - it }
-        val a = expenseReport.first { it in pairs }
-        val b = pairs.getValue(a)
-
+        val (a, b) = expenseReport.findPairForSum(2020) ?: error("Impossible.")
         return (a * b).also { println("$a * $b = $it") }
     }
 
@@ -71,5 +68,21 @@ object Day1 {
         }
 
         error("What? There no answer?")
+    }
+
+    // Complexity: O(n^2)
+    fun part2Optimized(expenseReport: List<Int>): Int {
+        for (a in expenseReport) {
+            val (b, c) = expenseReport.findPairForSum(2020 - a) ?: continue
+            return (a * b * c).also { println("$a * $b * $c = $it") }
+        }
+
+        error("What? There no answer?")
+    }
+
+    private fun List<Int>.findPairForSum(sum: Int): Pair<Int, Int>? {
+        val pairs = associateBy { sum - it }
+        val first = find { it in pairs } ?: return null
+        return first to pairs.getValue(first)
     }
 }

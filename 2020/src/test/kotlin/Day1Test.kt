@@ -38,4 +38,14 @@ class Day1Test {
     fun `part2Naive - expense report from input`() {
         assertEquals(expected = 263819430, actual = Day1.part2Naive(inputExpenseReport))
     }
+
+    @Test
+    fun `part2Optimized - expense report from example`() {
+        assertEquals(expected = 241861950, actual = Day1.part2Optimized(exampleExpenseReport))
+    }
+
+    @Test
+    fun `part2Optimized - expense report from input`() {
+        assertEquals(expected = 263819430, actual = Day1.part2Optimized(inputExpenseReport))
+    }
 }
