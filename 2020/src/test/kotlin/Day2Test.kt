@@ -22,4 +22,14 @@ class Day2Test {
     fun `part1Naive - input`() {
         assertEquals(expected = 542, actual = Day2.part1Naive(input))
     }
+
+    @Test
+    fun `part2Naive - example`() {
+        assertEquals(expected = 1, actual = Day2.part2Naive(example))
+    }
+
+    @Test
+    fun `part2Naive - input`() {
+        assertEquals(expected = 360, actual = Day2.part2Naive(input))
+    }
 }
