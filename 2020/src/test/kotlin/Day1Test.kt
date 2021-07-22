@@ -29,4 +29,22 @@ class Day1Test {
         // Then
         assertEquals(expected = 858496, actual = Day1.part1Naive(expenseReport))
     }
+
+    @Test
+    fun `part2Naive - expense report from example`() {
+        // Given
+        val expenseReport = exampleExpenseReport
+
+        // Expect
+        assertEquals(expected = 241861950, actual = Day1.part2Naive(expenseReport))
+    }
+
+    @Test
+    fun `part2Naive - expense report from input`() {
+        // Given
+        val expenseReport = readNumbers("day1.txt")
+
+        // Expect
+        assertEquals(expected = 263819430, actual = Day1.part2Naive(expenseReport))
+    }
 }
