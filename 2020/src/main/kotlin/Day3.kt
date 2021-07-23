@@ -67,9 +67,11 @@
  */
 object Day3 {
 
-    fun part1(forestMap: Array2D): Int {
+    fun part1(forestMap: Array2D): Int = forestMap.countTrees()
+
+    private fun Array2D.countTrees(): Int {
         var x = 0
-        return forestMap.count { forestLine ->
+        return count { forestLine ->
             val isTree = forestLine[x] == '#'
             x = (x + 3) % forestLine.size
             isTree
