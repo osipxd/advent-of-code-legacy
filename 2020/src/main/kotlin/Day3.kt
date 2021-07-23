@@ -67,8 +67,13 @@
  */
 object Day3 {
 
-    fun part1(example: Array2D): Int {
-        TODO("Not yet implemented")
+    fun part1(forestMap: Array2D): Int {
+        var x = 0
+        return forestMap.count { forestLine ->
+            val isTree = forestLine[x] == '#'
+            x = (x + 3) % forestLine.size
+            isTree
+        }
     }
 }
 

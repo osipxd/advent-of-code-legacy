@@ -26,5 +26,10 @@ class Day3Test {
         assertEquals(expected = 7, actual = Day3.part1(example))
     }
 
+    @Test
+    fun `part1 - input`() {
+        assertEquals(expected = 195, actual = Day3.part1(input))
+    }
+
     private fun List<String>.toArray2D() = this.map { it.toCharArray() }.toTypedArray()
 }
