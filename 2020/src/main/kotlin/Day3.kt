@@ -88,19 +88,17 @@
  */
 object Day3 {
 
-    fun part1(forestMap: Array2D): Int = forestMap.countTrees(right = 3, down = 1)
+    fun part1(forestMap: List<String>): Int = forestMap.countTrees(right = 3, down = 1)
 
-    fun part2(forestMap: Array2D): Long {
+    fun part2(forestMap: List<String>): Long {
         return listOf(1 to 1, 3 to 1, 5 to 1, 7 to 1, 1 to 2)
             .map { (right, down) -> forestMap.countTrees(right, down).toLong() }
             .reduce { result, nextValue -> result * nextValue }
     }
 
-    private fun Array2D.countTrees(right: Int, down: Int): Int {
-        val width = first().size
+    private fun List<String>.countTrees(right: Int, down: Int): Int {
+        val width = first().length
         val x = generateSequence(0) { (it + right) % width }.iterator()
         return indices.step(down).count { y -> this[y][x.next()] == '#' }
     }
 }
-
-typealias Array2D = Array<CharArray>

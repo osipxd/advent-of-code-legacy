@@ -3,7 +3,7 @@ import kotlin.test.assertEquals
 
 class Day3Test {
 
-    private val example: Array2D
+    private val example: List<String>
         get() = listOf(
             "..##.......",
             "#...#...#..",
@@ -16,10 +16,10 @@ class Day3Test {
             "#.##...#...",
             "#...##....#",
             ".#..#...#.#",
-        ).toArray2D()
+        )
 
-    private val input: Array2D
-        get() = readLines("day3.txt").toArray2D()
+    private val input: List<String>
+        get() = readLines("day3.txt")
 
     @Test
     fun `part1 - example`() {
@@ -40,6 +40,4 @@ class Day3Test {
     fun `part2 - input`() {
         assertEquals(expected = 3772314000, actual = Day3.part2(input))
     }
-
-    private fun List<String>.toArray2D() = this.map { it.toCharArray() }.toTypedArray()
 }
