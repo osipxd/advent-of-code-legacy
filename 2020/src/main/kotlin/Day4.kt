@@ -61,7 +61,13 @@
  */
 object Day4 {
 
-    fun part1(batch: Sequence<String>): Int {
-        TODO("An operation is not implemented.")
+    private val requiredFields = setOf("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid" /*"cid"*/)
+
+    fun part1(batch: String): Int {
+        return batch.split("\n\n")
+            .map { passport ->
+                passport.split("\n", " ").map { it.split(":").first() }
+            }
+            .count { fields -> fields.containsAll(requiredFields) }
     }
 }

@@ -13,6 +13,12 @@ fun readLines(name: String): List<String> {
         .readLines()
 }
 
+fun readText(name: String): String {
+    return getResourceAsStream(name)
+        .bufferedReader()
+        .readText()
+}
+
 fun readNumbers(name: String): List<Int> {
     return readLines(name).map { it.toInt() }
 }
