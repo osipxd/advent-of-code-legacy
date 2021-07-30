@@ -63,11 +63,30 @@ object Day4 {
 
     private val requiredFields = setOf("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid" /*"cid"*/)
 
-    fun part1(batch: String): Int {
-        return batch.split("\n\n")
-            .map { passport ->
-                passport.split("\n", " ").map { it.split(":").first() }
+    fun part1(batch: Sequence<String>): Int {
+        return validatePassports(batch, ::validateRequiredFields)
+    }
+
+    private fun validatePassports(batch: Sequence<String>, vararg validators: (Map<String, String>) -> Boolean): Int {
+        val passport = mutableMapOf<String, String>()
+        var count = 0
+
+        for (line in batch) {
+            if (line.isBlank()) {
+                if (validators.all { isValid -> isValid(passport) }) count++
+                passport.clear()
+                continue
             }
-            .count { fields -> fields.containsAll(requiredFields) }
+
+            passport.putAll(line.split(" ").associate { it.split(":").toPair() })
+        }
+        if (validators.all { isValid -> isValid(passport) }) count++
+        return count
+    }
+
+    private fun List<String>.toPair(): Pair<String, String> = first() to get(1)
+
+    private fun validateRequiredFields(passport: Map<String, String>): Boolean {
+        return passport.keys.containsAll(requiredFields)
     }
 }

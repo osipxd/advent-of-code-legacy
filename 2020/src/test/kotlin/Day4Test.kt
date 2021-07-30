@@ -3,7 +3,7 @@ import kotlin.test.assertEquals
 
 class Day4Test {
 
-    private val example: String
+    private val example: Sequence<String>
         get() = """
             ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
             byr:1937 iyr:2017 cid:147 hgt:183cm
@@ -18,10 +18,10 @@ class Day4Test {
             
             hcl:#cfa07d eyr:2025 pid:166559648
             iyr:2011 ecl:brn hgt:59in
-        """.trimIndent()
+        """.trimIndent().lineSequence()
 
-    private val input: String
-        get() = readText("day4.txt")
+    private val input: Sequence<String>
+        get() = readLineSequence("day4.txt")
 
     @Test
     fun `part1 - example`() {
