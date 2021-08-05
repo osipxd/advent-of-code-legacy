@@ -76,13 +76,19 @@ object Day5 {
 
     fun part1(seats: List<String>): Int = seats.maxOf(::parseSeatId)
 
+    // Complexity:
     fun part2Naive(seats: List<String>): Int {
+        var prev = -1
         return seats.asSequence()
             .map(::parseSeatId)
             .sorted()
-            .windowed(2)
-            .first { (prev, next) -> next - prev > 1 }
-            .first() + 1
+            .first { next -> ((next - prev) == 2).also { prev = next } } - 1
+    }
+
+    fun part2Optimized(seats: List<String>): Int {
+        val ids = seats.asSequence().map(::parseSeatId).toSet()
+        val min = requireNotNull(ids.minOrNull())
+        return (min..ids.size).first { it !in ids }
     }
 
     private fun parseSeatId(seat: String): Int {
