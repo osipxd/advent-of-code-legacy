@@ -21,4 +21,9 @@ internal class Day5Test {
     fun `part1 - input`() {
         assertEquals(871, Day5.part1(input))
     }
+
+    @Test
+    fun `part2Naive - input`() {
+        assertEquals(871, Day5.part2Naive(input))
+    }
 }

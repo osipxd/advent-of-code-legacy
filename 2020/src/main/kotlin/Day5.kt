@@ -51,6 +51,18 @@
  *
  * As a sanity check, look through your list of boarding passes. What is the highest seat ID on a boarding pass?
  *
+ * --- Part Two ---
+ *
+ * Ding! The "fasten seat belt" signs have turned on. Time to find your seat.
+ *
+ * It's a completely full flight, so your seat should be the only missing boarding pass in your list.
+ * However, there's a catch: some of the seats at the very front and back of the plane don't exist on this aircraft,
+ * so they'll be missing from your list as well.
+ *
+ * Your seat wasn't at the very front or back, though; the seats with IDs +1 and -1 from yours will be in your list.
+ *
+ * What is the ID of your seat?
+ *
  * **[Open in browser](https://adventofcode.com/2020/day/5)**
  */
 object Day5 {
@@ -62,11 +74,18 @@ object Day5 {
         'R' to '1',
     )
 
-    fun part1(seats: List<String>): Int {
-        return seats.maxOf(::parseSeat)
+    fun part1(seats: List<String>): Int = seats.maxOf(::parseSeatId)
+
+    fun part2Naive(seats: List<String>): Int {
+        return seats.asSequence()
+            .map(::parseSeatId)
+            .sorted()
+            .windowed(2)
+            .first { (prev, next) -> next - prev > 1 }
+            .first() + 1
     }
 
-    private fun parseSeat(seat: String): Int {
+    private fun parseSeatId(seat: String): Int {
         val row = seat.take(7).parseBinaryCode()
         val column = seat.takeLast(3).parseBinaryCode()
         return row * 8 + column
