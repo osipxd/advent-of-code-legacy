@@ -62,6 +62,8 @@
  * Your seat wasn't at the very front or back, though; the seats with IDs +1 and -1 from yours will be in your list.
  *
  * What is the ID of your seat?
+ * 
+ * ....####.######.....
  *
  * **[Open in browser](https://adventofcode.com/2020/day/5)**
  */
@@ -85,10 +87,11 @@ object Day5 {
             .first { next -> ((next - prev) == 2).also { prev = next } } - 1
     }
 
+    // Complexity: O(n)
     fun part2Optimized(seats: List<String>): Int {
         val ids = seats.asSequence().map(::parseSeatId).toSet()
         val min = requireNotNull(ids.minOrNull())
-        return (min..ids.size).first { it !in ids }
+        return (min..(min + ids.size)).first { it !in ids }
     }
 
     private fun parseSeatId(seat: String): Int {

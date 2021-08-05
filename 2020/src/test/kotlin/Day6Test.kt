@@ -22,7 +22,7 @@ class Day6Test {
     """.trimIndent()
 
     private val input: String
-        get() = readText("day6.txt")
+        get() = readText("day6.txt").trim()
 
     @Test
     fun `part1 - example`() {
@@ -32,5 +32,25 @@ class Day6Test {
     @Test
     fun `part1 - input`() {
         assertEquals(6703, Day6.part1(input))
+    }
+
+    @Test
+    fun `part2HashMapCount - example`() {
+        assertEquals(6, Day6.part2HashMapCount(example))
+    }
+
+    @Test
+    fun `part2HashMapCount - input`() {
+        assertEquals(3430, Day6.part2HashMapCount(input))
+    }
+
+    @Test
+    fun `part2SetIntersect - example`() {
+        assertEquals(6, Day6.part2SetIntersect(example))
+    }
+
+    @Test
+    fun `part2SetIntersect - input`() {
+        assertEquals(3430, Day6.part2SetIntersect(input))
     }
 }

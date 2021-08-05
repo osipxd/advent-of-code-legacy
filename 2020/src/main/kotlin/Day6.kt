@@ -53,37 +53,40 @@
  * For each group, count the number of questions to which anyone answered "yes". What is the sum of those counts?
  *
  * --- Part Two ---
-As you finish the last group's customs declaration, you notice that you misread one word in the instructions:
-
-You don't need to identify the questions to which anyone answered "yes"; you need to identify the questions to which everyone answered "yes"!
-
-Using the same example as above:
-
-abc
-
-a
-b
-c
-
-ab
-ac
-
-a
-a
-a
-a
-
-b
-This list represents answers from five groups:
-
-In the first group, everyone (all 1 person) answered "yes" to 3 questions: a, b, and c.
-In the second group, there is no question to which everyone answered "yes".
-In the third group, everyone answered yes to only 1 question, a. Since some people did not answer "yes" to b or c, they don't count.
-In the fourth group, everyone answered yes to only 1 question, a.
-In the fifth group, everyone (all 1 person) answered "yes" to 1 question, b.
-In this example, the sum of these counts is 3 + 0 + 1 + 1 + 1 = 6.
-
-For each group, count the number of questions to which everyone answered "yes". What is the sum of those counts?
+ *
+ * As you finish the last group's customs declaration, you notice that you misread one word in the instructions:
+ *
+ * You don't need to identify the questions to which anyone answered "yes"; you need to identify the questions
+ * to which everyone answered "yes"!
+ *
+ * Using the same example as above:
+ * ```
+ * abc
+ *
+ * a
+ * b
+ * c
+ *
+ * ab
+ * ac
+ *
+ * a
+ * a
+ * a
+ * a
+ *
+ * b
+ * ```
+ *
+ * This list represents answers from five groups:
+ * - In the first group, everyone (all 1 person) answered "yes" to 3 questions: a, b, and c.
+ * - In the second group, there is no question to which everyone answered "yes".
+ * - In the third group, everyone answered yes to only 1 question, a. Since some people did not answer "yes" to b or c, they don't count.
+ * - In the fourth group, everyone answered yes to only 1 question, a.
+ * - In the fifth group, everyone (all 1 person) answered "yes" to 1 question, b.
+ * - In this example, the sum of these counts is 3 + 0 + 1 + 1 + 1 = 6.
+ *
+ * For each group, count the number of questions to which everyone answered "yes". What is the sum of those counts?
  *
  * *[Open in browser](https://adventofcode.com/2020/day/6)*
  */
@@ -97,5 +100,21 @@ object Day6 {
                 set.addAll(group.asSequence())
                 (set - '\n').size
             }
+    }
+
+    fun part2HashMapCount(text: String): Int {
+        return text.split("\n\n")
+            .sumOf { group ->
+                val counts = group.fold(mutableMapOf<Char, Int>().withDefault { 0 }) { map, letter ->
+                    map[letter] = map.getValue(letter) + 1
+                    map
+                }
+                val groupSize = counts.getValue('\n') + 1
+                counts.count { (_, count) -> count == groupSize }
+            }
+    }
+
+    fun part2SetIntersect(string: String) = string.split("\n\n").sumOf { group ->
+        group.lines().map(String::toSet).reduce { all, line -> all intersect line }.size
     }
 }
