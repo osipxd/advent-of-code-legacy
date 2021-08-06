@@ -53,4 +53,14 @@ class Day6Test {
     fun `part2SetIntersect - input`() {
         assertEquals(3430, Day6.part2SetIntersect(input))
     }
+
+    @Test
+    fun `part2StringIntersect - example`() {
+        assertEquals(6, Day6.part2StringIntersect(example))
+    }
+
+    @Test
+    fun `part2StringIntersect - input`() {
+        assertEquals(3430, Day6.part2StringIntersect(input))
+    }
 }

@@ -117,4 +117,18 @@ object Day6 {
     fun part2SetIntersect(string: String) = string.split("\n\n").sumOf { group ->
         group.lines().map(String::toSet).reduce { all, line -> all intersect line }.size
     }
+
+    fun part2StringIntersect(string: String): Int {
+        val intersect = intersect()
+        return string.split("\n\n").sumOf { group -> group.lines().reduce(intersect).length }
+    }
+
+    private fun intersect(): (String, String) -> String {
+        val set = mutableSetOf<Char>()
+        return { left, right ->
+            set.clear()
+            set.addAll(left.asSequence())
+            right.filter { it in set }
+        }
+    }
 }
