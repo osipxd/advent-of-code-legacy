@@ -121,6 +121,12 @@ object Day1 {
 
     fun part1(measurements: Sequence<Int>): Int = measurements.countIncreases()
 
+    fun part2(measurements: Sequence<Int>): Int {
+        return measurements.windowed(3)
+            .map(List<Int>::sum)
+            .countIncreases()
+    }
+
     private fun Sequence<Int>.countIncreases(): Int {
         var increases = 0
         var lastMeasurement = Int.MAX_VALUE
