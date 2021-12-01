@@ -3,11 +3,11 @@ import kotlin.test.assertEquals
 
 internal class Day1Test {
 
-    private val example: List<Int>
-        get() = listOf(199, 200, 208, 210, 200, 207, 240, 269, 260, 263)
+    private val example: Sequence<Int>
+        get() = sequenceOf(199, 200, 208, 210, 200, 207, 240, 269, 260, 263)
 
-    private val input: List<Int>
-        get() = readNumbers("day1.txt")
+    private val input: Sequence<Int>
+        get() = readNumbersSequence("day1.txt")
 
     @Test
     fun `part1 - example`() {

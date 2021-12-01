@@ -19,8 +19,12 @@ fun readText(name: String): String {
         .readText()
 }
 
+fun readNumbersSequence(name: String): Sequence<Int> {
+    return readLineSequence(name).map(String::toInt)
+}
+
 fun readNumbers(name: String): List<Int> {
-    return readLines(name).map { it.toInt() }
+    return readLines(name).map(String::toInt)
 }
 
 private object Resources {
