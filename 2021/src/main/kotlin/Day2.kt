@@ -79,36 +79,50 @@
  */
 object Day2 {
 
-    fun part1(commands: Sequence<String>): Int {
-        var horizontal = 0
-        var vertical = 0
-        commands.map { it.split(" ") }
-            .forEach { (direction, distance) ->
-                when(direction) {
-                    "forward" -> horizontal += distance.toInt()
-                    "up" -> vertical -= distance.toInt()
-                    "down" -> vertical += distance.toInt()
-                }
-            }
-        return vertical * horizontal
+    fun part1(commands: Sequence<String>): Int = commands.calculateResult(P1Location())
+    fun part2(commands: Sequence<String>): Int = commands.calculateResult(P2Location())
+
+    private fun Sequence<String>.calculateResult(handler: BaseLocation): Int {
+        return fold(handler) { location, command ->
+            val (direction, distance) = command.split(" ")
+            location.handleCommand(direction, distance.toInt())
+        }.getResult()
     }
 
-    fun part2(commands: Sequence<String>): Int {
-        var horizontal = 0
-        var vertical = 0
-        var aim = 0
-        commands.map { it.split(" ") }
-            .forEach { (direction, distanceInput) ->
-                val distance = distanceInput.toInt()
-                when(direction) {
-                    "forward" -> {
-                        horizontal += distance
-                        vertical += aim * distance
-                    }
-                    "up" -> aim -= distance
-                    "down" -> aim += distance
-                }
+    class P1Location : BaseLocation() {
+        override fun handleCommand(direction: String, distance: Int): BaseLocation {
+            when (direction) {
+                "forward" -> x += distance
+                "up" -> y -= distance
+                "down" -> y += distance
             }
-        return vertical * horizontal
+            return this
+        }
+    }
+
+    class P2Location : BaseLocation() {
+        private var aim = 0
+
+        override fun handleCommand(direction: String, distance: Int): BaseLocation {
+            when (direction) {
+                "forward" -> {
+                    x += distance
+                    y += aim * distance
+                }
+
+                "up" -> aim -= distance
+                "down" -> aim += distance
+            }
+            return this
+        }
+    }
+
+    abstract class BaseLocation {
+        protected var x: Int = 0
+        protected var y: Int = 0
+
+        abstract fun handleCommand(direction: String, distance: Int): BaseLocation
+
+        fun getResult(): Int = x * y
     }
 }
