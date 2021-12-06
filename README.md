@@ -7,6 +7,12 @@ Advent of Code solutions in Kotlin.
 - [Day 1: Sonar Sweep](2021/src/main/kotlin/Day1.kt)
   <sup>[Input](2021/src/test/resources/day1.txt) |
   [Test](2021/src/test/kotlin/Day1Test.kt)</sup>
+- [Day 2: Dive!](2021/src/main/kotlin/Day2.kt)
+  <sup>[Input](2021/src/test/resources/day2.txt) |
+  [Test](2021/src/test/kotlin/Day2Test.kt)</sup>
+- [Day 3: Binary Diagnostic](2021/src/main/kotlin/Day3.kt)
+  <sup>[Input](2021/src/test/resources/day3.txt) |
+  [Test](2021/src/test/kotlin/Day3Test.kt)</sup>
 
 ## [2020](https://adventofcode.com/2020)
 
