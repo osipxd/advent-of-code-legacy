@@ -25,4 +25,14 @@ internal class Day2Test {
     fun `part1 - input`() {
         assertEquals(expected = 1459206, actual = Day2.part1(input))
     }
+
+    @Test
+    fun `part2 - example`() {
+        assertEquals(expected = 900, actual = Day2.part2(example))
+    }
+
+    @Test
+    fun `part2 - input`() {
+        assertEquals(expected = 1320534480, actual = Day2.part2(input))
+    }
 }
